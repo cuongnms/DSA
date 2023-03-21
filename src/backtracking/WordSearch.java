@@ -1,6 +1,4 @@
-package Backtracking;
-
-import java.util.Arrays;
+package backtracking;
 
 public class WordSearch {
     private static final int[][] routine = {{1,0},{-1,0}, {0,1}, {0,-1}};
