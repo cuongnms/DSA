@@ -1,12 +1,16 @@
 package backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Queen {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> result = new ArrayList<>();
         backtracking(result, n, 0, new ArrayList<>());
+        for(List<String> l: result){
+            System.out.println(Arrays.toString(l.toArray()));
+        }
         return result;
 
     }
@@ -15,10 +19,12 @@ public class Queen {
         if(rowToPlace==size){
             result.add(new ArrayList<>(tmp));
         }else{
-            for(int i = 0 ; i < 4; i++){
-                if(tryPlace(i, rowToPlace, tmp)){
-                    String queenIndex = place(i);
+            for(int col = 0 ; col < size; col++){
+                if(tryPlace(col, rowToPlace, tmp)){
+                    String queenIndex = place(col, size);
                     tmp.add(queenIndex);
+                    backtracking(result, size, rowToPlace+1, tmp);
+                    tmp.remove(tmp.size()-1);
                 }
             }
         }
@@ -29,16 +35,19 @@ public class Queen {
             if(tmp.get(i).indexOf("Q") == col){
                 return false;
             }
-            if(tmp.get(i).indexOf("Q") - row >= 0 ){
+            if(tmp.get(i).indexOf("Q") - col > 0 && row - i == tmp.get(i).indexOf("Q") - col){
+                return false;
+            }
+            if(col - tmp.get(i).indexOf("Q") > 0 && row - i == col - tmp.get(i).indexOf("Q")){
                 return false;
             }
         }
         return true;
     }
 
-    private String place(int index){
+    private String place(int index, int size){
         String place = "";
-        for(int i = 0 ; i < 4; i++){
+        for(int i = 0 ; i < size; i++){
             if(index == i){
                 place+="Q";
             }else{
@@ -46,5 +55,10 @@ public class Queen {
             }
         }
         return place;
+    }
+
+    public static void main(String[] args) {
+        Queen q = new Queen();
+        q.solveNQueens(4);
     }
 }
