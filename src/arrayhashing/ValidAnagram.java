@@ -1,6 +1,8 @@
 package arrayhashing;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class ValidAnagram {
 //    public static boolean isAnagram(String s, String t) {
