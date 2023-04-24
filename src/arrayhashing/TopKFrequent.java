@@ -1,9 +1,6 @@
 package arrayhashing;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,10 +11,19 @@ public class TopKFrequent {
             if(!result.containsKey(nums[i])){
                 result.put(nums[i], 0);
             }
-            int frequent = result.get(nums[i]);
+            int frequent = result.get(nums[i]) + 1;
             result.put(nums[i], frequent);
         }
-        Stream<Map.Entry<Integer, Integer>> sorted = result.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).map(Map.Entry::getKey).co;
-        return
+        List<Integer> sorted = result.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).map(Map.Entry::getKey).collect(Collectors.toList()).subList(0,k);
+        int[] arr = new int[k];
+        for(int i = 0 ; i < sorted.size(); i++){
+            arr[0] = sorted.get(0);
+        }
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        TopKFrequent t = new TopKFrequent();
+        t.topKFrequent(new int[]{1,1,1,2,2,3}, 2);
     }
 }
