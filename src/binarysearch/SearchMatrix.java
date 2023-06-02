@@ -6,6 +6,7 @@ public class SearchMatrix {
         int lastIndex = matrix.length * matrix[0].length - 1;
         for(;firstIndex<=lastIndex;){
             int midIndex = firstIndex + (lastIndex-firstIndex)/2;
+            // Calculate index of mid value
             int midValue = matrix[midIndex/matrix[0].length][midIndex % matrix[0].length];
             if(midValue == target){
                 return true;
